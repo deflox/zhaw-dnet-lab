@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D4EEABC6-9864-4D15-B8B4-6B2D3D2E03D0}</ProjectGuid>
+    <ProjectGuid>{420E2E3A-0E67-4706-9082-54CBC3CA73A7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>lab8</RootNamespace>
-    <AssemblyName>lab8</AssemblyName>
+    <RootNamespace>lab8_1</RootNamespace>
+    <AssemblyName>lab8_1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,9 +54,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
