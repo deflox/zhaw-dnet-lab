@@ -16,11 +16,16 @@ namespace lab11_web_application
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string HelloWorld()
         {
             return "Hello World";
+        }
+
+        [WebMethod]
+        public double bmi(double weight, double height)
+        {
+            return weight / (height * height);
         }
     }
 }

@@ -38,8 +38,10 @@ namespace lab11_web_application
                 }
 
                 double heightVal = Convert.ToDouble(height.Text);
-                double bmi = weightVal / (heightVal * heightVal);
-                this.BMI.Text = Convert.ToString(bmi);
+
+                WebService1 bmiService = new WebService1();
+                this.BMI.Text = Convert.ToString(bmiService.bmi(weightVal, heightVal));
+
                 //BMIImage.BMI = bmi;
                 /*
                 <%@ Register TagPrefix="my" Namespace="BMIControl" Assembly="BMIControl" %>
