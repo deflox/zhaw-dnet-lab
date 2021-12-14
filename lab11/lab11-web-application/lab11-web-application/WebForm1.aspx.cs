@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace lab11_web_application
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        protected BMIControl.BMIControl BMIControl;
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
@@ -43,6 +40,11 @@ namespace lab11_web_application
                 double heightVal = Convert.ToDouble(height.Text);
                 double bmi = weightVal / (heightVal * heightVal);
                 this.BMI.Text = Convert.ToString(bmi);
+                //BMIImage.BMI = bmi;
+                /*
+                <%@ Register TagPrefix="my" Namespace="BMIControl" Assembly="BMIControl" %>
+                <my:BMIControl id="BMIImage" Runat="server" ></my:BMIControl>
+                 */
             }
         }
     }

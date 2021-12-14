@@ -70,6 +70,7 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebService1.asmx" />
     <Content Include="Weight.ascx" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +84,10 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Weight.ascx.cs">
       <DependentUpon>Weight.ascx</DependentUpon>
@@ -104,6 +109,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BMIControl\BMIControl.csproj">
+      <Project>{3768ebcb-66a0-4639-983c-b43c8c8ce866}</Project>
+      <Name>BMIControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
