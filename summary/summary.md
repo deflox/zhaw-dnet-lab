@@ -89,6 +89,12 @@ TODO:
     - [IDataReader](#idatareader)
   - [Verbindungsloser Zugriff](#verbindungsloser-zugriff)
   - [Datenbankeigenschaften](#datenbankeigenschaften)
+- [VB.NET](#vbnet)
+  - [Allgemeines](#allgemeines)
+  - [Datentypen](#datentypen)
+  - [Deklarationen](#deklarationen-1)
+  - [Arrays](#arrays-1)
+- [Exam](#exam)
 
 ## HelloWorld-Programm
 ```csharp
@@ -2322,3 +2328,141 @@ reader.Close();
     * Phantom Read: Zusätzliche Daten ercheinen in späteren Leseoperationen
 * Dauerhaftigkeit
   * Die durch abgeschlossene Transaktion veränderter Daten bleiben auch nach Soft- oder Hardware Fehlern erhalten
+
+# VB.NET
+
+## Allgemeines
+* Gross- und Kleinschreibung wird nicht unterschieden, wird aber von IDE erzwungen
+* Ende der Zeile ist der Zeilenumbruch oder `_` falls ein Statement über mehrere Zeilen geht
+* 
+
+```vb
+' hello world als klasse
+Imports System
+    Namespace TestNamespace
+        Public Class TestClass
+            Public Shared Sub Main(ByVal args() as String)
+            Console.WriteLine("Hello World!")
+        End Sub
+    End Class
+End Namespace
+
+' 
+```
+
+## Datentypen
+```vb
+' Boolean
+' Byte
+' Char
+' Short, Integer, Long
+' Single, Double
+' Decimal
+' Date
+' Object
+' String
+
+Enum Action
+    Start
+    [Stop] ' Stop is a reserved word
+    Rewind
+    Forward
+End Enum
+
+Enum Status
+    Flunk = 50
+    Pass = 70
+    Excel = 90
+End Enum
+```
+
+## Deklarationen
+```vb
+Dim x As Integer
+Console.WriteLine(x.GetType()) 'Prints System.Int32
+Console.WriteLine(TypeName(x)) 'Prints Integer
+
+Dim a As Action = Action.Stop
+
+Dim Variable1, Variable2 As Datentyp
+Dim Variable3 As Integer = 1
+```
+
+## Arrays
+```vb
+Dim Array1() As String
+Dim Array2 As Long()
+
+Dim Array3(10) As Long ' array mit long elementen mit 10 elementen
+Dim Kunden() As String = {“Maier“, “Hans“} ' array initalisieren
+Dim Array4(,,,) As String ' mehrdimensionaler array
+
+Dim names(5) As String
+names(0) = "David"
+names(5) = "Bobby" ' 0..5
+For i As Integer = 0 To nums.Length - 1
+    Console.WriteLine(names(i))
+Next
+```
+
+# Exam
+```cs
+private static void RegexExercise()
+        {
+            string td = "<span class=\"cachtel\">Schweiz-Tschechien</span></a><td width =\"80\"> 0:1 </td><span class=\"cachtel\">Portugal-Türkei</span></a><td width=\"80\"> 2:0</td>";
+            string landPattern = @"[A-Za-zäöü]+\-+[A-Za-zäöü]+";
+            string scorePattern = @"[0-9]+:+[0-9]+";
+            var landMatches = Regex.Matches(td, landPattern);
+            var scoreMatches = Regex.Matches(td, scorePattern);
+            if (landMatches.Count == scoreMatches.Count)
+            {
+                for (int i = 0; i < landMatches.Count; i++)
+                {
+                    var countries = landMatches[i].ToString();
+                    var scores = scoreMatches[i].ToString();
+                    var countrySplit = countries.Split('-');
+                    var scoreSplit = scores.Split(':');
+                    Console.WriteLine($"<Land1>{countrySplit[0]}</Land1><Land2>{countrySplit[1]}</Land2><Tore1>{scoreSplit[0]}</Tore1><Tore2>{scoreSplit[1]}</Tore2>");
+                }
+            }
+        }
+```
+
+```cs
+interface SportsCar
+{
+    void WhatAreYou();
+}
+interface GermanCar
+{
+    void WhatAreYou();
+}
+abstract class Car
+{
+    public virtual void WhatAreYou() { Console.WriteLine("I am a Car"); }
+}
+    abstract class Golf : GermanCar
+    {
+        public virtual void WhatAreYou() { Console.WriteLine("I am a Golf"); }
+    }
+    class GolfGTI : Golf, SportsCar
+    {
+        public override void WhatAreYou() { Console.WriteLine("I am a Golf GTI"); }
+    }
+    abstract class Opel : Car, GermanCar
+    {
+        public override void WhatAreYou() { Console.WriteLine("I am an Opel"); }
+    }
+    class Manta : Opel, SportsCar
+    {
+        public new void WhatAreYou() { Console.WriteLine("eeh du, echt cool"); }
+    }
+```
+
+```cs
+using (WebClient client = new WebClient())
+{
+string htmlCode = client.DownloadString("https://www.google.ch/");
+Console.WriteLine(htmlCode);
+}
+```

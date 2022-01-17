@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab8_1", "lab8_1\lab8_1.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lab8_2", "lab8_2\lab8_2.csproj", "{248B6687-584F-4BD8-A437-00F6D260B2BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sep", "sep\sep.csproj", "{1C096ECB-314F-4FC1-AEE1-9D1110BEEAB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sep", "sep\sep.csproj", "{1C096ECB-314F-4FC1-AEE1-9D1110BEEAB2}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "sep_vbnet", "sep_vbnet\sep_vbnet.vbproj", "{FC056437-64F8-4829-8054-33FB0AAAB385}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{1C096ECB-314F-4FC1-AEE1-9D1110BEEAB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C096ECB-314F-4FC1-AEE1-9D1110BEEAB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C096ECB-314F-4FC1-AEE1-9D1110BEEAB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC056437-64F8-4829-8054-33FB0AAAB385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC056437-64F8-4829-8054-33FB0AAAB385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC056437-64F8-4829-8054-33FB0AAAB385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC056437-64F8-4829-8054-33FB0AAAB385}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
