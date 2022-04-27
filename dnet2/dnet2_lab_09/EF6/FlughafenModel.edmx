@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FlughafenDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Flug">
+          <Key>
+            <PropertyRef Name="Flug_ID" />
+          </Key>
+          <Property Name="Flug_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Flugnr" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Von" Type="smallint" Nullable="false" />
+          <Property Name="Nach" Type="smallint" Nullable="false" />
+          <Property Name="Abflug" Type="datetime" Nullable="false" />
+          <Property Name="Ankunft" Type="datetime" Nullable="false" />
+          <Property Name="Fluglinie_ID" Type="int" Nullable="false" />
+          <Property Name="Flugzeug_ID" Type="int" Nullable="false" />
+          <Property Name="Test" Type="int" />
+        </EntityType>
+        <EntityType Name="Flughafen">
+          <Key>
+            <PropertyRef Name="Flughafen_ID" />
+          </Key>
+          <Property Name="Flughafen_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IATA" Type="varchar" MaxLength="3" />
+          <Property Name="ICAO" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fluglinie">
+          <Key>
+            <PropertyRef Name="Fluglinie_ID" />
+          </Key>
+          <Property Name="Fluglinie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IATA" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Firmenname" Type="varchar" MaxLength="30" />
+          <Property Name="Heimat_Flughafen" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flugzeug">
+          <Key>
+            <PropertyRef Name="Flugzeug_ID" />
+          </Key>
+          <Property Name="Flugzeug_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kapazitaet" Type="int" Nullable="false" />
+          <Property Name="Typ_ID" Type="int" Nullable="false" />
+          <Property Name="Fluglinie_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Flug_Flug_FK_1">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Von" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_2">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Nach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_3">
+          <End Role="Fluglinie" Type="Self.Fluglinie" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fluglinie">
+              <PropertyRef Name="Fluglinie_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Fluglinie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_4">
+          <End Role="Flugzeug" Type="Self.Flugzeug" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flugzeug">
+              <PropertyRef Name="Flugzeug_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Flugzeug_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fluglinie_Fluglinie_FK_1">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Fluglinie" Type="Self.Fluglinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Fluglinie">
+              <PropertyRef Name="Heimat_Flughafen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FlughafenDBModelStoreContainer">
+          <EntitySet Name="Flug" EntityType="Self.Flug" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flughafen" EntityType="Self.Flughafen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fluglinie" EntityType="Self.Fluglinie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flugzeug" EntityType="Self.Flugzeug" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Flug_Flug_FK_1" Association="Self.Flug_Flug_FK_1">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_2" Association="Self.Flug_Flug_FK_2">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_3" Association="Self.Flug_Flug_FK_3">
+            <End Role="Fluglinie" EntitySet="Fluglinie" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_4" Association="Self.Flug_Flug_FK_4">
+            <End Role="Flugzeug" EntitySet="Flugzeug" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Fluglinie_Fluglinie_FK_1" Association="Self.Fluglinie_Fluglinie_FK_1">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Fluglinie" EntitySet="Fluglinie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FlughafenDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Flug">
+          <Key>
+            <PropertyRef Name="Flug_ID" />
+          </Key>
+          <Property Name="Flug_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Flugnr" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Von" Type="Int16" Nullable="false" />
+          <Property Name="Nach" Type="Int16" Nullable="false" />
+          <Property Name="Abflug" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ankunft" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fluglinie_ID" Type="Int32" Nullable="false" />
+          <Property Name="Flugzeug_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flughafen" Relationship="Self.Flug_Flug_FK_1" FromRole="Flug" ToRole="Flughafen" />
+          <NavigationProperty Name="Flughafen1" Relationship="Self.Flug_Flug_FK_2" FromRole="Flug" ToRole="Flughafen" />
+          <NavigationProperty Name="Fluglinie" Relationship="Self.Flug_Flug_FK_3" FromRole="Flug" ToRole="Fluglinie" />
+          <NavigationProperty Name="Flugzeug" Relationship="Self.Flug_Flug_FK_4" FromRole="Flug" ToRole="Flugzeug" />
+          <Property Name="Test" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Flughafen">
+          <Key>
+            <PropertyRef Name="Flughafen_ID" />
+          </Key>
+          <Property Name="Flughafen_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IATA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ICAO" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Flug" Relationship="Self.Flug_Flug_FK_1" FromRole="Flughafen" ToRole="Flug" />
+          <NavigationProperty Name="Flug1" Relationship="Self.Flug_Flug_FK_2" FromRole="Flughafen" ToRole="Flug" />
+          <NavigationProperty Name="Fluglinie" Relationship="Self.Fluglinie_Fluglinie_FK_1" FromRole="Flughafen" ToRole="Fluglinie" />
+        </EntityType>
+        <EntityType Name="Fluglinie">
+          <Key>
+            <PropertyRef Name="Fluglinie_ID" />
+          </Key>
+          <Property Name="Fluglinie_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IATA" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firmenname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Heimat_Flughafen" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Flug" Relationship="Self.Flug_Flug_FK_3" FromRole="Fluglinie" ToRole="Flug" />
+          <NavigationProperty Name="Flughafen" Relationship="Self.Fluglinie_Fluglinie_FK_1" FromRole="Fluglinie" ToRole="Flughafen" />
+        </EntityType>
+        <EntityType Name="Flugzeug">
+          <Key>
+            <PropertyRef Name="Flugzeug_ID" />
+          </Key>
+          <Property Name="Flugzeug_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kapazitaet" Type="Int32" Nullable="false" />
+          <Property Name="Typ_ID" Type="Int32" Nullable="false" />
+          <Property Name="Fluglinie_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flug" Relationship="Self.Flug_Flug_FK_4" FromRole="Flugzeug" ToRole="Flug" />
+        </EntityType>
+        <Association Name="Flug_Flug_FK_1">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Von" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_2">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Nach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_3">
+          <End Role="Fluglinie" Type="Self.Fluglinie" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fluglinie">
+              <PropertyRef Name="Fluglinie_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Fluglinie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Flug_Flug_FK_4">
+          <End Role="Flugzeug" Type="Self.Flugzeug" Multiplicity="1" />
+          <End Role="Flug" Type="Self.Flug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flugzeug">
+              <PropertyRef Name="Flugzeug_ID" />
+            </Principal>
+            <Dependent Role="Flug">
+              <PropertyRef Name="Flugzeug_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fluglinie_Fluglinie_FK_1">
+          <End Role="Flughafen" Type="Self.Flughafen" Multiplicity="1" />
+          <End Role="Fluglinie" Type="Self.Fluglinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flughafen">
+              <PropertyRef Name="Flughafen_ID" />
+            </Principal>
+            <Dependent Role="Fluglinie">
+              <PropertyRef Name="Heimat_Flughafen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FlughafenDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Flug" EntityType="Self.Flug" />
+          <EntitySet Name="Flughafen" EntityType="Self.Flughafen" />
+          <EntitySet Name="Fluglinie" EntityType="Self.Fluglinie" />
+          <EntitySet Name="Flugzeug" EntityType="Self.Flugzeug" />
+          <AssociationSet Name="Flug_Flug_FK_1" Association="Self.Flug_Flug_FK_1">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_2" Association="Self.Flug_Flug_FK_2">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_3" Association="Self.Flug_Flug_FK_3">
+            <End Role="Fluglinie" EntitySet="Fluglinie" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Flug_Flug_FK_4" Association="Self.Flug_Flug_FK_4">
+            <End Role="Flugzeug" EntitySet="Flugzeug" />
+            <End Role="Flug" EntitySet="Flug" />
+          </AssociationSet>
+          <AssociationSet Name="Fluglinie_Fluglinie_FK_1" Association="Self.Fluglinie_Fluglinie_FK_1">
+            <End Role="Flughafen" EntitySet="Flughafen" />
+            <End Role="Fluglinie" EntitySet="Fluglinie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FlughafenDBModelStoreContainer" CdmEntityContainer="FlughafenDBEntities">
+          <EntitySetMapping Name="Flug">
+            <EntityTypeMapping TypeName="FlughafenDBModel.Flug">
+              <MappingFragment StoreEntitySet="Flug">
+                <ScalarProperty Name="Test" ColumnName="Test" />
+                <ScalarProperty Name="Flug_ID" ColumnName="Flug_ID" />
+                <ScalarProperty Name="Flugnr" ColumnName="Flugnr" />
+                <ScalarProperty Name="Von" ColumnName="Von" />
+                <ScalarProperty Name="Nach" ColumnName="Nach" />
+                <ScalarProperty Name="Abflug" ColumnName="Abflug" />
+                <ScalarProperty Name="Ankunft" ColumnName="Ankunft" />
+                <ScalarProperty Name="Fluglinie_ID" ColumnName="Fluglinie_ID" />
+                <ScalarProperty Name="Flugzeug_ID" ColumnName="Flugzeug_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flughafen">
+            <EntityTypeMapping TypeName="FlughafenDBModel.Flughafen">
+              <MappingFragment StoreEntitySet="Flughafen">
+                <ScalarProperty Name="Flughafen_ID" ColumnName="Flughafen_ID" />
+                <ScalarProperty Name="IATA" ColumnName="IATA" />
+                <ScalarProperty Name="ICAO" ColumnName="ICAO" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fluglinie">
+            <EntityTypeMapping TypeName="FlughafenDBModel.Fluglinie">
+              <MappingFragment StoreEntitySet="Fluglinie">
+                <ScalarProperty Name="Fluglinie_ID" ColumnName="Fluglinie_ID" />
+                <ScalarProperty Name="IATA" ColumnName="IATA" />
+                <ScalarProperty Name="Firmenname" ColumnName="Firmenname" />
+                <ScalarProperty Name="Heimat_Flughafen" ColumnName="Heimat_Flughafen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flugzeug">
+            <EntityTypeMapping TypeName="FlughafenDBModel.Flugzeug">
+              <MappingFragment StoreEntitySet="Flugzeug">
+                <ScalarProperty Name="Flugzeug_ID" ColumnName="Flugzeug_ID" />
+                <ScalarProperty Name="Kapazitaet" ColumnName="Kapazitaet" />
+                <ScalarProperty Name="Typ_ID" ColumnName="Typ_ID" />
+                <ScalarProperty Name="Fluglinie_ID" ColumnName="Fluglinie_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
