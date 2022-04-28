@@ -1,0 +1,26 @@
+﻿@using RankingService;
+@Model IEnumerable<Competitor>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ranking List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach(Competitor competitor in Model)
+                {
+                    <tr>
+                        <td>@competitor.Name</td>
+                        <td>@competitor.Time</td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
